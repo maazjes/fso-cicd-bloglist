@@ -5,6 +5,7 @@ module.exports = {
         es2021: true,
         jest: true
     },
+    root: true,
     extends: [
         'plugin:react/recommended',
         'airbnb'
