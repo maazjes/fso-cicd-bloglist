@@ -23,6 +23,9 @@ COPY . .
 
 RUN npm install
 
+RUN npm config set user 0
+RUN npm config set unsafe-perm true
+
 RUN cd frontend && npm run build && cp -r build ../build && cd ..
 RUN rm -r frontend
 
