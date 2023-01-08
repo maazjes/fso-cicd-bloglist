@@ -28,9 +28,8 @@ jobs:
       - name: test
         run: npm run test tests && cd frontend && npm run test
       - name: e2e tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
-          command: npm run cypress:run
           start: npm run start:test
           wait-on: http://localhost:8080/
           record: true
