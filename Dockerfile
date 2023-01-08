@@ -1,8 +1,5 @@
 FROM debian:bullseye as builder
 
-RUN npm config set user 0
-RUN npm config set unsafe-perm true
-
 ARG NODE_VERSION=18.0.0
 
 RUN apt-get update; apt install -y curl python-is-python3 pkg-config build-essential
@@ -25,9 +22,6 @@ ENV NODE_ENV production
 COPY . .
 
 RUN npm install
-
-RUN cd frontend && npm run build && cp -r build ../build && cd ..
-RUN rm -r frontend
 
 FROM debian:bullseye
 
