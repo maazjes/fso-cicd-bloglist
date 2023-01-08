@@ -37,6 +37,7 @@ jobs:
           start: npm run start:test
           wait-on: http://localhost:8080/
   deploy_app:
+    needs: simple_deployment_pipeline
     if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
     runs-on: ubuntu-latest
     env:
