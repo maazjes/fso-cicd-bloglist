@@ -1,9 +1,5 @@
 name: Deployment pipeline
 
-env:
-  MONGODB_URI: ${{ secrets.MONGODB_URI }}
-  SECRET: ${{ secrets.SECRET }}
-
 on:
   push:
     branches:
@@ -14,6 +10,9 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      SECRET: ${{ secrets.SECRET }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -25,14 +24,52 @@ jobs:
       - name: lint
         run: npm run lint && cd frontend && npm run lint
       - name: build
-        run: rm -rf build && cd frontend && npm run build && cp -r build ../build
+        run: cd frontend && npm run build && cp -r build ../build
       - name: test
         run: npm run test tests && cd frontend && npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
-        env:
-            NODE_ENV: test
         with:
           command: npm run cypress:run
           start: npm run start:test
-          wait-on: http://localhost:3000/
+          wait-on: http://localhost:8080/
+  deploy_app:
+    if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
+    needs: simple_deployment_pipeline
+    runs-on: ubuntu-latest
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@main
+      - run: flyctl deploy --remote-only
+  tag_release:
+    needs: deploy_app
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          text: A new version of Pokedex deployed
+          description: to https://bloglist-cicd.fly.dev/ by ${{ github.event.sender.login }}
+          avatarUrl: ${{ github.event.sender.avatar_url }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          text: Build failed
+          description: commit ${{ github.event.repository.url	}} by ${{ github.event.sender.login }} broke the build
+          avatarUrl: ${{ github.event.sender.avatar_url }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
