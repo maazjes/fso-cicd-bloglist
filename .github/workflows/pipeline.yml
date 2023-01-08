@@ -35,7 +35,7 @@ jobs:
         with:
           command: npm run cypress:run
           start: npm run start:test
-          wait-on: http://localhost:3000/
+          wait-on: http://localhost:8080/
   deploy_app:
     if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
     needs: simple_deployment_pipeline
