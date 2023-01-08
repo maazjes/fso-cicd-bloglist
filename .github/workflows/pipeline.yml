@@ -29,7 +29,7 @@ jobs:
       - name: test
         run: npm run test tests && cd frontend && npm run test
       - name: e2e tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4.1.0
         env:
             NODE_ENV: test
         with:
