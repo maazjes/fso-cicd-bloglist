@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "lintr": "npm run lint -- --fix",
     "start:test": "cross-env NODE_ENV=test node index.js",
-    "start:prod": "node index.js"
+    "start:prod": "node index.js",
+    "cypress:run": "cypress run"
   },
   "author": "",
   "license": "ISC",
