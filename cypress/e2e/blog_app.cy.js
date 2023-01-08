@@ -1,7 +1,7 @@
 describe('Blog app', () => {
     beforeEach(() => {
-        cy.request('POST', 'http://localhost:8080/api/testing/reset')
-        cy.visit('http://localhost:8080')
+        cy.request('POST', 'http://localhost:3000/api/testing/reset')
+        cy.visit('http://localhost:3000')
     })
 
     it('Login form is shown', () => {
@@ -15,8 +15,8 @@ describe('Blog app', () => {
                 username: 'asder',
                 password: 'asd'
             }
-            cy.request('POST', 'http://localhost:8080/api/users', user)
-            cy.visit('http://localhost:8080')
+            cy.request('POST', 'http://localhost:3000/api/users', user)
+            cy.visit('http://localhost:3000')
         })
 
         it('succeeds with correct credentials', () => {
@@ -41,11 +41,11 @@ describe('Blog app', () => {
                 username: 'asder',
                 password: 'asd'
             }
-            cy.request('POST', 'http://localhost:8080/api/users', user)
-            cy.request('POST', 'http://localhost:8080/api/login', { username: user.username, password: user.password })
+            cy.request('POST', 'http://localhost:3000/api/users', user)
+            cy.request('POST', 'http://localhost:3000/api/login', { username: user.username, password: user.password })
                 .then((response) => {
                     localStorage.setItem('user', JSON.stringify(response.body))
-                    cy.visit('http://localhost:8080')
+                    cy.visit('http://localhost:3000')
                 })
         })
 
