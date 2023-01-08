@@ -23,6 +23,9 @@ COPY . .
 
 RUN npm install
 
+RUN cd frontend && npm run build && cp -r build ../build && cd ..
+RUN rm -r frontend
+
 FROM debian:bullseye
 
 LABEL fly_launch_runtime="nodejs"
