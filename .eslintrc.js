@@ -3,7 +3,8 @@ module.exports = {
         browser: true,
         commonjs: true,
         es2021: true,
-        jest: true
+        jest: true,
+        'cypress/globals': true
     },
     root: true,
     extends: [
@@ -16,7 +17,7 @@ module.exports = {
         ecmaVersion: 'latest'
     },
     plugins: [
-        'react'
+        'react', 'cypress'
     ],
     rules: {
         'comma-dangle': ['error', 'never'],
