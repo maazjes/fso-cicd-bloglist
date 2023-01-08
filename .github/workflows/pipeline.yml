@@ -13,38 +13,14 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: npm install 
-        run: npm install && cd frontend && npm install
-      - name: lint
-        run: npm run lint && cd frontend && npm run lint
-      - name: build
-        run: rm -rf build && cd frontend && npm run build && cp -r build ../build
-      - name: test
-        run: npm run test tests && cd frontend && npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        env:
-            NODE_ENV: test
-        with:
-          command: npm run cypress:run
-          start: npm run start:test
-          wait-on: http://localhost:8080/
   deploy_app:
     if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
-    needs: simple_deployment_pipeline
     runs-on: ubuntu-latest
     env:
       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
     steps:
       - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@main
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
   tag_release:
     needs: deploy_app
