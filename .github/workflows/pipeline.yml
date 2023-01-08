@@ -32,6 +32,6 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           env:
-            'NODE_ENV': test
+            NODE_ENV: test
           start: npm run start:prod
           wait-on: http://localhost:3000/
