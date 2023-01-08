@@ -1,5 +1,8 @@
 FROM debian:bullseye as builder
 
+RUN npm config set user 0
+RUN npm config set unsafe-perm true
+
 ARG NODE_VERSION=18.0.0
 
 RUN apt-get update; apt install -y curl python-is-python3 pkg-config build-essential
@@ -18,8 +21,6 @@ WORKDIR /app
 # Ref: https://docs.npmjs.com/cli/v9/commands/npm-install#description
 
 ENV NODE_ENV production
-
-RUN chown -R root:root .
 
 COPY . .
 
