@@ -16,9 +16,7 @@
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "lintr": "npm run lint -- --fix",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "lintr": "npm run lint -- --fix"
   },
   "jest": {
     "transformIgnorePatterns": [
@@ -48,10 +46,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "cross-env": "^7.0.3",
-    "cypress": "^11.2.0",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-destructuring-newline": "^0.1.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^27.1.6",

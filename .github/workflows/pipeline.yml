@@ -25,14 +25,14 @@ jobs:
       - name: lint
         run: npm run lint && cd frontend && npm run lint
       - name: build
-        run: cd frontend && npm run build && cp -r build ../build
+        run: rm -rf build && cd frontend && npm run build && cp -r build ../build
       - name: test
         run: npm run test tests && cd frontend && npm run test
       - name: e2e tests
-        uses: cypress-io/github-action@v4.1.0
+        uses: cypress-io/github-action@v2
         env:
             NODE_ENV: test
         with:
           command: npm run cypress:run
-          start: npm run start:prod
+          start: npm run start:test
           wait-on: http://localhost:3000/
