@@ -23,8 +23,8 @@ COPY . .
 
 RUN npm install
 
-RUN cd frontend && npm run build && cp -r build ../build && cd ..
-RUN rm -r frontend
+RUN cd frontend && npm install && npm run build && cp -r build ../build && cd ..
+RUN rm -rf frontend
 
 FROM debian:bullseye
 
