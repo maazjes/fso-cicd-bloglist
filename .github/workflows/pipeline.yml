@@ -44,8 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: npm install
-      - run: cd frontend && npm install && npm run build && cp -r build ../build && cd .. && rm -rf frontend
+      - run: npm install && cd frontend && npm install
       - run: flyctl deploy --remote-only
   tag_release:
     needs: deploy_app
