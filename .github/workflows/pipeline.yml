@@ -30,8 +30,8 @@ jobs:
         run: npm run test tests && cd frontend && npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
-        with:
-          env:
+        env:
             NODE_ENV: test
+        with:
           start: npm run start:prod
           wait-on: http://localhost:3000/
