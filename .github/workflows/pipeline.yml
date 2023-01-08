@@ -1,8 +1,8 @@
 name: Deployment pipeline
 
 env:
-      MONGODB_URI: ${{ secrets.MONGODB_URI }}
-      SECRET: ${{ secrets.SECRET }}
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  SECRET: ${{ secrets.SECRET }}
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           start: npm run start:test
-          wait-on: http://localhost:3000/
+          wait-on: http://localhost:8080/
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
