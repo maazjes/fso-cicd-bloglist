@@ -1,6 +1,6 @@
 describe('Blog app', () => {
     beforeEach(() => {
-        cy.request('POST', 'http://localhost:3001/api/testing/reset')
+        cy.request('POST', 'http://localhost:3000/api/testing/reset')
         cy.visit('http://localhost:3000')
     })
 
@@ -15,7 +15,7 @@ describe('Blog app', () => {
                 username: 'asder',
                 password: 'asd'
             }
-            cy.request('POST', 'http://localhost:3001/api/users', user)
+            cy.request('POST', 'http://localhost:3000/api/users', user)
             cy.visit('http://localhost:3000')
         })
 
@@ -41,8 +41,8 @@ describe('Blog app', () => {
                 username: 'asder',
                 password: 'asd'
             }
-            cy.request('POST', 'http://localhost:3001/api/users', user)
-            cy.request('POST', 'http://localhost:3001/api/login', { username: user.username, password: user.password })
+            cy.request('POST', 'http://localhost:3000/api/users', user)
+            cy.request('POST', 'http://localhost:3000/api/login', { username: user.username, password: user.password })
                 .then((response) => {
                     localStorage.setItem('user', JSON.stringify(response.body))
                     cy.visit('http://localhost:3000')
