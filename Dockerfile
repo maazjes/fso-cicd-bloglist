@@ -19,10 +19,9 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-COPY . .
+RUN chown -R root:root .
 
-RUN npm config set user 0
-RUN npm config set unsafe-perm true
+COPY . .
 
 RUN npm install
 
