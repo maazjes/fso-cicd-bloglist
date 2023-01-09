@@ -1,6 +1,10 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:8080/api/blogs'
+let baseUrl = 'http://localhost:8080/api/blogs'
+
+if (process.env.NODE_ENV === 'production') {
+    baseUrl = 'https://bloglist-cicd.fly.dev/api/blogs'
+}
 
 let token = null
 
@@ -37,6 +41,5 @@ const remove = async (id) => {
     return response.data
 }
 
-export default {
-    getAll, setToken, create, update, remove
-}
+const blogsService = { getAll, setToken, create, update, remove }
+export default blogsService
