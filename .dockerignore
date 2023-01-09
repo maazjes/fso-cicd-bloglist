@@ -4,3 +4,7 @@ Dockerfile
 node_modules
 .git
 build
+cypress
+cypress.config.js
+tests
+*.rest
