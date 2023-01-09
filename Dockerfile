@@ -21,9 +21,9 @@ ENV NODE_ENV production
 
 COPY . .
 
-RUN npm install
+RUN npm ci --only=production
 
-RUN cd frontend && npm install && npm run build && cp -r build ../build && cd ..
+RUN cd frontend && npm ci --only=production && npm run build && cp -r build ../build && cd ..
 RUN rm -rf frontend
 
 FROM debian:bullseye

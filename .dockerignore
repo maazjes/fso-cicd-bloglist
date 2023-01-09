@@ -13,3 +13,4 @@ cypress.config.js
 new_blog.rest
 new_user.rest
 login.rest
+tests
