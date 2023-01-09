@@ -9,7 +9,6 @@ module.exports = {
     root: true,
     extends: [
         'plugin:react/recommended',
-        'airbnb',
         'plugin:react/jsx-runtime'
     ],
     overrides: [
