@@ -3,8 +3,7 @@ module.exports = {
         browser: true,
         commonjs: true,
         es2021: true,
-        'jest/globals': true,
-        'cypress/globals': true
+        'jest/globals': true
     },
     root: true,
     extends: [
@@ -24,8 +23,7 @@ module.exports = {
     plugins: [
         'react',
         'destructuring-newline',
-        'jest',
-        'cypress'
+        'jest'
     ],
     rules: {
         'comma-dangle': ['error', 'never'],
