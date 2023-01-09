@@ -3,11 +3,13 @@ module.exports = {
         browser: true,
         commonjs: true,
         es2021: true,
-        'jest/globals': true
+        'jest/globals': true,
+        'cypress/globals': true
     },
     root: true,
     extends: [
         'plugin:react/recommended',
+        'airbnb',
         'plugin:react/jsx-runtime'
     ],
     overrides: [
@@ -22,7 +24,8 @@ module.exports = {
     plugins: [
         'react',
         'destructuring-newline',
-        'jest'
+        'jest',
+        'cypress'
     ],
     rules: {
         'comma-dangle': ['error', 'never'],
