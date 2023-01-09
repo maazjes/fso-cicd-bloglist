@@ -4,3 +4,12 @@ Dockerfile
 node_modules
 .git
 build
+cypress
+cypress.config.js
+**/.eslintrc.js
+**/.eslintignore
+**/.gitignore
+.github
+new_blog.rest
+new_user.rest
+login.rest
