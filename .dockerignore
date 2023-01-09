@@ -8,3 +8,4 @@ cypress
 cypress.config.js
 tests
 *.rest
+.eslintrc.js

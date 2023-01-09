@@ -22,8 +22,7 @@ module.exports = {
     plugins: [
         'react',
         'destructuring-newline',
-        'jest',
-        'cypress'
+        'jest'
     ],
     rules: {
         'comma-dangle': ['error', 'never'],
