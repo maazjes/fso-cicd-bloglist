@@ -1,0 +1,7 @@
+POST http://localhost:3000/api/testing/reset
+Content-Type: application/json
+
+{
+    "username": "xxsubuxx",
+    "password": "subulovesmade"
+}
